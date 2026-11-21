@@ -1,224 +1,242 @@
 ﻿import json
 from pathlib import Path
-from typing import Any, Dict, List, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 
-from music21 import articulations, chord, converter, note, spanner, tempo
+from music21 import chord, converter, meter, note, spanner, tempo
 
+from config.instrument_settings import DEFAULT_SETTINGS, GuitarPhysicsConfig
 from src.domain.musical_event import (
     ArticulationType,
     MusicalEvent,
     MusicalSequence,
     NoteEvent,
 )
-from src.ingestion.parser_interface import BaseScoreParser, ScoreParsingError
 
 
-class MidiXmlScoreParser(BaseScoreParser):
-    supported_extensions: Tuple[str, ...] = (
-        ".mid",
-        ".midi",
-        ".musicxml",
-        ".xml",
-        ".mxl",
-        ".json",
-    )
+class ScoreParsingError(Exception):
+    """Error al leer o normalizar una partitura musical."""
 
-    def __init__(self, onset_quantize_sec: float = 0.005) -> None:
+
+class MidiXmlScoreParser:
+    SUPPORTED_EXTENSIONS = {".mid", ".midi", ".xml", ".musicxml", ".mxl", ".json"}
+
+    def __init__(
+        self,
+        physics: GuitarPhysicsConfig = DEFAULT_SETTINGS.physics,
+        onset_quantize_sec: float = 0.035,
+    ) -> None:
+        self.physics = physics
         self.onset_quantize_sec = onset_quantize_sec
 
     def parse(self, file_path: Union[str, Path]) -> MusicalSequence:
-        path = self._validate_file(file_path)
-        if path.suffix.lower() == ".json":
+        path = Path(file_path)
+        if not path.exists():
+            raise FileNotFoundError(f"No se encontró el archivo musical: {path}")
+
+        ext = path.suffix.lower()
+        if ext not in self.SUPPORTED_EXTENSIONS:
+            raise ScoreParsingError(
+                f"Formato no soportado '{ext}'. Extensiones válidas: {sorted(self.SUPPORTED_EXTENSIONS)}"
+            )
+
+        if ext == ".json":
             return self._parse_json(path)
         return self._parse_music21(path)
+
+    def _parse_json(self, path: Path) -> MusicalSequence:
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            raise ScoreParsingError(f"JSON inválido en {path}: {exc}") from exc
+
+        title = str(payload.get("title", path.stem))
+        tempo_bpm = float(payload.get("tempo_bpm", 120.0))
+        raw_ts = payload.get("time_signature", list(DEFAULT_SETTINGS.solver.default_time_signature))
+        time_sig = (int(raw_ts[0]), int(raw_ts[1])) if len(raw_ts) >= 2 else (4, 4)
+
+        raw_events = payload.get("events", [])
+        if not raw_events:
+            raise ScoreParsingError(f"El archivo {path} no contiene eventos musicales.")
+
+        events: List[MusicalEvent] = []
+        for idx, ev_data in enumerate(raw_events):
+            onset_sec = float(ev_data["onset_sec"])
+            notes_list: List[NoteEvent] = []
+            for n_data in ev_data.get("notes", []):
+                art_str = str(n_data.get("articulation", "normal")).lower()
+                articulation = (
+                    ArticulationType(art_str)
+                    if art_str in {a.value for a in ArticulationType}
+                    else ArticulationType.NORMAL
+                )
+                notes_list.append(
+                    NoteEvent(
+                        midi_pitch=int(n_data["midi"]),
+                        duration_sec=max(float(n_data.get("duration_sec", 0.25)), 0.02),
+                        velocity=int(n_data.get("velocity", 80)),
+                        articulation=articulation,
+                    )
+                )
+            if notes_list:
+                events.append(
+                    MusicalEvent(
+                        index=idx,
+                        onset_sec=onset_sec,
+                        notes=tuple(notes_list),
+                    )
+                )
+
+        if not events:
+            raise ScoreParsingError(f"No se extrajeron notas válidas desde {path}.")
+
+        return MusicalSequence.from_events(
+            events=events,
+            title=title,
+            tempo_bpm=tempo_bpm,
+            metadata={"source": str(path), "time_signature": time_sig},
+        )
 
     def _parse_music21(self, path: Path) -> MusicalSequence:
         try:
             score = converter.parse(str(path))
         except Exception as exc:
-            raise ScoreParsingError(f"Error al leer '{path.name}': {exc}") from exc
+            raise ScoreParsingError(f"Error de music21 al leer {path}: {exc}") from exc
 
-        flat_score = score.flatten()
-        title = (
-            score.metadata.title
-            if score.metadata and score.metadata.title
-            else path.stem
-        )
-        marks = list(flat_score.getElementsByClass(tempo.MetronomeMark))
-        bpm = float(marks[0].number) if marks and marks[0].number else 120.0
+        tempo_bpm = self._extract_tempo(score)
+        time_sig = self._extract_time_signature(score)
+        sec_per_quarter = 60.0 / tempo_bpm
 
-        grouped_notes: Dict[float, List[NoteEvent]] = {}
-        for entry in flat_score.secondsMap:
-            element = entry["element"]
-            if not isinstance(element, (note.Note, chord.Chord)):
-                continue
+        slurred_ids = set()
+        for sp in score.recurse().getElementsByClass(spanner.Slur):
+            spanned = list(sp.getSpannedElements())
+            for elem in spanned[1:]:
+                slurred_ids.add(id(elem))
 
-            onset = round(
-                round(float(entry["offsetSeconds"]) / self.onset_quantize_sec)
-                * self.onset_quantize_sec,
-                6,
+        raw_entries: List[Tuple[float, NoteEvent]] = []
+        flat_notes = score.flatten().notes
+
+        for elem in flat_notes:
+            onset_sec = float(elem.offset) * sec_per_quarter
+            dur_sec = max(float(elem.quarterLength) * sec_per_quarter, 0.03)
+            articulation = (
+                ArticulationType.LEGATO
+                if id(elem) in slurred_ids
+                else ArticulationType.NORMAL
             )
-            duration = max(float(entry["durationSeconds"]), 1e-3)
-            extracted = self._extract_note_events(element, duration)
-            if extracted:
-                grouped_notes.setdefault(onset, []).extend(extracted)
 
-        if not grouped_notes:
-            raise ScoreParsingError(f"No se encontraron notas válidas en '{path.name}'.")
+            if isinstance(elem, note.Note):
+                if elem.tie is not None and elem.tie.type in ("stop", "continue"):
+                    continue
+                vel = int(elem.volume.velocity or 80)
+                raw_entries.append(
+                    (
+                        onset_sec,
+                        NoteEvent(
+                            midi_pitch=int(elem.pitch.midi),
+                            duration_sec=dur_sec,
+                            velocity=vel,
+                            articulation=articulation,
+                        ),
+                    )
+                )
+            elif isinstance(elem, chord.Chord):
+                vel = int(elem.volume.velocity or 80)
+                for p in elem.pitches:
+                    raw_entries.append(
+                        (
+                            onset_sec,
+                            NoteEvent(
+                                midi_pitch=int(p.midi),
+                                duration_sec=dur_sec,
+                                velocity=vel,
+                                articulation=articulation,
+                            ),
+                        )
+                    )
 
-        events: List[MusicalEvent] = []
+        if not raw_entries:
+            raise ScoreParsingError(f"No se encontraron notas ejecutables en {path}.")
+
+        raw_entries.sort(key=lambda item: (item[0], item[1].midi_pitch))
+
+        # Agrupación temporal (clustering de rasgueos dentro de onset_quantize_sec)
+        clusters: List[Tuple[float, List[NoteEvent]]] = []
         active_end_times: Dict[int, float] = {}
 
-        for onset in sorted(grouped_notes.keys()):
-            raw_notes = grouped_notes[onset]
-            has_new_attack = any(not n.is_tied_continuation for n in raw_notes)
+        for onset_sec, n_ev in raw_entries:
+            prev_end = active_end_times.get(n_ev.midi_pitch, -1.0)
+            if onset_sec < prev_end - 0.015 and n_ev.velocity < 35:
+                continue
+            active_end_times[n_ev.midi_pitch] = onset_sec + n_ev.duration_sec
 
-            # Omite eventos donde solo continúan ligaduras sin un nuevo ataque
-            if not has_new_attack:
-                for n in raw_notes:
-                    if n.midi_pitch in active_end_times:
-                        active_end_times[n.midi_pitch] = max(
-                            active_end_times[n.midi_pitch], onset + n.duration_sec
-                        )
+            if not clusters:
+                clusters.append((onset_sec, [n_ev]))
                 continue
 
-            event_notes: Dict[int, NoteEvent] = {}
-            for n in raw_notes:
-                event_notes[n.midi_pitch] = n
-                active_end_times[n.midi_pitch] = onset + n.duration_sec
+            cluster_onset, cluster_notes = clusters[-1]
+            if (onset_sec - cluster_onset) <= self.onset_quantize_sec:
+                cluster_notes.append(n_ev)
+            else:
+                clusters.append((onset_sec, [n_ev]))
 
+        events: List[MusicalEvent] = []
+        for idx, (onset_sec, notes_group) in enumerate(clusters):
+            # Limita a máximo 6 notas simultáneas (cuerdas de la guitarra)
+            dedup: Dict[int, NoteEvent] = {}
+            for n in sorted(notes_group, key=lambda x: x.midi_pitch):
+                dedup[n.midi_pitch] = n
+            selected_notes = tuple(list(dedup.values())[: self.physics.num_strings])
             events.append(
                 MusicalEvent(
-                    index=len(events),
-                    onset_sec=onset,
-                    notes=tuple(event_notes.values()),
+                    index=idx,
+                    onset_sec=round(onset_sec, 6),
+                    notes=selected_notes,
                 )
             )
 
-        if not events:
-            raise ScoreParsingError(f"No se generaron eventos atacados en '{path.name}'.")
+        title = path.stem
+        if score.metadata is not None and score.metadata.title:
+            title = str(score.metadata.title)
 
         return MusicalSequence.from_events(
             events=events,
             title=title,
-            tempo_bpm=bpm,
-            metadata={"source_file": str(path), "format": path.suffix.lower()},
+            tempo_bpm=tempo_bpm,
+            metadata={"source": str(path), "time_signature": time_sig},
         )
 
-    def _extract_note_events(
+    @staticmethod
+    def _extract_tempo(score: object) -> float:
+        marks = list(score.recurse().getElementsByClass(tempo.MetronomeMark))  # type: ignore[attr-defined]
+        for mm in marks:
+            if mm.number is not None and mm.number > 0:
+                return float(mm.number)
+        return 120.0
+
+    @staticmethod
+    def _extract_time_signature(score: object) -> Tuple[int, int]:
+        sigs = list(score.recurse().getElementsByClass(meter.TimeSignature))  # type: ignore[attr-defined]
+        for ts in sigs:
+            if ts.numerator and ts.denominator:
+                return (int(ts.numerator), int(ts.denominator))
+        return DEFAULT_SETTINGS.solver.default_time_signature
+
+    def segment_sequence(
         self,
-        element: Union[note.Note, chord.Chord],
-        duration_sec: float,
-    ) -> List[NoteEvent]:
-        if isinstance(element, note.Note):
-            return [self._build_single_note(element, element, duration_sec)]
+        sequence: MusicalSequence,
+        segmentation_settings: Optional[Any] = None,
+    ) -> List[MusicalSequence]:
+        """Divide una secuencia por compases y un máximo configurable de eventos."""
+        from dataclasses import replace
 
-        return [
-            self._build_single_note(sub_note, element, duration_sec)
-            for sub_note in element.notes
-        ]
+        from config.instrument_settings import InstrumentSettings, SolverConfig
+        from src.optimization.segmented_solver import MeasureAwareSegmenter
 
-    def _build_single_note(
-        self,
-        target_note: note.Note,
-        owner: Union[note.Note, chord.Chord],
-        duration_sec: float,
-    ) -> NoteEvent:
-        tie_obj = target_note.tie or owner.tie
-        is_continuation = bool(tie_obj and tie_obj.type in ("stop", "continue"))
-        articulation = self._resolve_articulation(target_note, owner, is_continuation)
+        settings = segmentation_settings
+        if isinstance(settings, SolverConfig):
+            settings = replace(DEFAULT_SETTINGS, solver=settings)
+        elif not isinstance(settings, InstrumentSettings):
+            settings = DEFAULT_SETTINGS
 
-        velocity = 80
-        if target_note.volume and target_note.volume.velocity is not None:
-            velocity = int(target_note.volume.velocity)
-        elif owner.volume and owner.volume.velocity is not None:
-            velocity = int(owner.volume.velocity)
-
-        return NoteEvent(
-            midi_pitch=int(target_note.pitch.midi),
-            duration_sec=duration_sec,
-            velocity=max(1, min(127, velocity)),
-            articulation=articulation,
-            is_tied_continuation=is_continuation,
-        )
-
-    def _resolve_articulation(
-        self,
-        target_note: note.Note,
-        owner: Union[note.Note, chord.Chord],
-        is_continuation: bool,
-    ) -> ArticulationType:
-        if is_continuation:
-            return ArticulationType.TIE
-
-        for sp in list(target_note.getSpannerSites()) + list(owner.getSpannerSites()):
-            if isinstance(sp, spanner.Glissando):
-                return ArticulationType.SLIDE
-            if isinstance(sp, spanner.Slur) and not (
-                sp.isFirst(target_note) or sp.isFirst(owner)
-            ):
-                return ArticulationType.LEGATO
-
-        for art in list(target_note.articulations) + list(owner.articulations):
-            if isinstance(art, articulations.Staccato):
-                return ArticulationType.STACCATO
-            if isinstance(art, (articulations.HammerOn, articulations.PullOff)):
-                return ArticulationType.LEGATO
-
-        return ArticulationType.NORMAL
-
-    def _parse_json(self, path: Path) -> MusicalSequence:
-        try:
-            payload: Dict[str, Any] = json.loads(path.read_text(encoding="utf-8"))
-        except Exception as exc:
-            raise ScoreParsingError(f"JSON inválido en '{path.name}': {exc}") from exc
-
-        raw_events = payload.get("events")
-        if not isinstance(raw_events, list) or not raw_events:
-            raise ScoreParsingError("El JSON debe contener una lista no vacía 'events'.")
-
-        events: List[MusicalEvent] = []
-        for idx, item in enumerate(raw_events):
-            onset = float(item["onset_sec"])
-            notes: List[NoteEvent] = []
-
-            if "notes" in item:
-                for n in item["notes"]:
-                    notes.append(
-                        NoteEvent(
-                            midi_pitch=int(n["midi"]),
-                            duration_sec=float(n.get("duration_sec", 0.5)),
-                            velocity=int(n.get("velocity", 80)),
-                            articulation=ArticulationType(
-                                n.get("articulation", ArticulationType.NORMAL.value)
-                            ),
-                            is_tied_continuation=bool(n.get("is_tied_continuation", False)),
-                        )
-                    )
-            elif "pitches" in item:
-                dur = float(item.get("duration_sec", 0.5))
-                art = ArticulationType(
-                    item.get("articulation", ArticulationType.NORMAL.value)
-                )
-                for pitch in item["pitches"]:
-                    notes.append(
-                        NoteEvent(
-                            midi_pitch=int(pitch),
-                            duration_sec=dur,
-                            velocity=int(item.get("velocity", 80)),
-                            articulation=art,
-                        )
-                    )
-            else:
-                raise ScoreParsingError(f"Evento {idx} sin claves 'notes' ni 'pitches'.")
-
-            events.append(
-                MusicalEvent(index=idx, onset_sec=onset, notes=tuple(notes))
-            )
-
-        return MusicalSequence.from_events(
-            events=events,
-            title=str(payload.get("title", path.stem)),
-            tempo_bpm=float(payload.get("tempo_bpm", 120.0)),
-            metadata={"source_file": str(path), "format": ".json"},
-        )
+        segmenter = MeasureAwareSegmenter(settings)
+        return [segment.sequence for segment in segmenter.segment(sequence)]

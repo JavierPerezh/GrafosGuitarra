@@ -68,6 +68,8 @@ class DualGraphBuilder:
                 f"Desajuste entre capas del DAG ({base_dag.num_layers}) "
                 f"y eventos musicales ({len(sequence)})."
             )
+        if base_dag.num_layers == 0:
+            raise ValueError("El DAG base no contiene capas.")
 
         nodes_by_id: Dict[str, CompoundNode] = {}
         compound_layers: List[Tuple[CompoundNode, ...]] = []
@@ -92,7 +94,12 @@ class DualGraphBuilder:
 
         # Capa 0: cápsulas iniciales (SOURCE -> u_0)
         layer_0: List[CompoundNode] = []
-        for u0 in base_dag.layers[0]:
+        initial_ids = base_dag.adjacency.get(
+            base_dag.source_id,
+            tuple(node.node_id for node in base_dag.layers[0]),
+        )
+        for u0_id in initial_ids:
+            u0 = base_dag.nodes_by_id[u0_id]
             cid = f"C0_{SOURCE_NODE_ID}__{u0.node_id}"
             cnode = CompoundNode(
                 node_id=cid,
@@ -105,10 +112,9 @@ class DualGraphBuilder:
             add_edge(DUAL_SOURCE_ID, cid, zero_cost_vector())
         compound_layers.append(tuple(layer_0))
 
-        # Capas 1..m-1: cápsulas de transición (u_{i-1} -> u_i) y enlaces de 2do orden
+        # Capas 1..m-1: cápsulas de transición (u_{i-1} -> u_i) derivadas de E en base_dag
         for idx in range(1, base_dag.num_layers):
             prev_layer_nodes = compound_layers[idx - 1]
-            curr_base_layer = base_dag.layers[idx]
             curr_compound_layer: List[CompoundNode] = []
 
             prev_by_curr_id: Dict[str, List[CompoundNode]] = {}
@@ -122,7 +128,14 @@ class DualGraphBuilder:
 
             for u_prev in base_dag.layers[idx - 1]:
                 incoming_cnodes = prev_by_curr_id.get(u_prev.node_id, [])
-                for u_curr in curr_base_layer:
+                if not incoming_cnodes:
+                    continue
+
+                allowed_targets = base_dag.adjacency.get(u_prev.node_id, ())
+                for target_id in allowed_targets:
+                    if target_id == base_dag.sink_id:
+                        continue
+                    u_curr = base_dag.nodes_by_id[target_id]
                     cid = f"C{idx}_{u_prev.node_id}__{u_curr.node_id}"
                     cnode = CompoundNode(
                         node_id=cid,
@@ -154,7 +167,10 @@ class DualGraphBuilder:
             compound_layers.append(tuple(curr_compound_layer))
 
         for final_cnode in compound_layers[-1]:
-            add_edge(final_cnode.node_id, DUAL_SINK_ID, zero_cost_vector())
+            if base_dag.sink_id in base_dag.adjacency.get(
+                final_cnode.curr_posture.node_id, ()
+            ):
+                add_edge(final_cnode.node_id, DUAL_SINK_ID, zero_cost_vector())
 
         return CompoundGraph(
             nodes_by_id=nodes_by_id,

@@ -17,3 +17,6 @@ data/output/*
 *.bbl
 *.blg
 *.synctex.gz
+
+# Valoración interna de resultados
+/docs/valoracion_resultados.md

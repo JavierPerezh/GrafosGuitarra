@@ -1,11 +1,13 @@
 ﻿import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Sequence, Tuple, Union
 
 from config.instrument_settings import DEFAULT_SETTINGS, GuitarPhysicsConfig
 from src.domain.musical_event import ArticulationType, MusicalEvent, MusicalSequence
 from src.graph.base_dag import PostureNode
 from src.optimization.namoa_star import NamoaStarResult, ParetoSolution
+
+FrontBounds = Tuple[Tuple[float, float, float], Tuple[float, float, float]]
 
 
 class TabRenderer:
@@ -26,10 +28,29 @@ class TabRenderer:
             labels.append(note_letter.lower() if idx == 0 else note_letter.upper())
         return labels
 
+    @staticmethod
+    def _compute_front_bounds(
+        solutions: Sequence[ParetoSolution],
+    ) -> Optional[FrontBounds]:
+        if not solutions:
+            return None
+        mins = (
+            min(float(sol.total_cost[0]) for sol in solutions),
+            min(float(sol.total_cost[1]) for sol in solutions),
+            min(float(sol.total_cost[2]) for sol in solutions),
+        )
+        maxs = (
+            max(float(sol.total_cost[0]) for sol in solutions),
+            max(float(sol.total_cost[1]) for sol in solutions),
+            max(float(sol.total_cost[2]) for sol in solutions),
+        )
+        return mins, maxs
+
     def render_ascii(
         self,
         solution: ParetoSolution,
         sequence: MusicalSequence,
+        front_bounds: Optional[FrontBounds] = None,
     ) -> str:
         if len(solution.posture_sequence) != len(sequence):
             raise ValueError(
@@ -47,8 +68,12 @@ class TabRenderer:
             columns.append(col_tokens)
 
         w_bio, w_timbre, w_fluidez = solution.total_cost
+        profile = getattr(solution, "profile", None)
+        if profile is None:
+            profile = self._profile_label(solution, front_bounds=front_bounds)
+
         header = (
-            f"=== Opción Pareto #{solution.solution_id} | {sequence.title} ===\n"
+            f"=== Opción Pareto #{solution.solution_id} {profile} | {sequence.title} ===\n"
             f"Costo [W_bio={w_bio:.3f}, W_timbre={w_timbre:.3f}, W_fluidez={w_fluidez:.3f}]"
         )
 
@@ -69,9 +94,10 @@ class TabRenderer:
         if not result.solutions:
             return f"{summary}\n\nNo se encontraron trayectorias viables."
 
+        front_bounds = self._compute_front_bounds(result.solutions)
         blocks = [summary]
         for sol in result.solutions:
-            blocks.append(self.render_ascii(sol, sequence))
+            blocks.append(self.render_ascii(sol, sequence, front_bounds=front_bounds))
         return "\n\n" + ("\n" + "-" * self.line_width + "\n\n").join(blocks)
 
     def to_dict(
@@ -79,7 +105,9 @@ class TabRenderer:
         result: NamoaStarResult,
         sequence: MusicalSequence,
     ) -> Dict[str, Any]:
+        front_bounds = self._compute_front_bounds(result.solutions)
         solutions_payload: List[Dict[str, Any]] = []
+
         for sol in result.solutions:
             w_bio, w_timbre, w_fluidez = sol.total_cost
             steps: List[Dict[str, Any]] = []
@@ -105,12 +133,13 @@ class TabRenderer:
             solutions_payload.append(
                 {
                     "solution_id": sol.solution_id,
+                    "profile": self._profile_label(sol, front_bounds=front_bounds),
                     "cost_vector": {
                         "W_bio": round(float(w_bio), 6),
                         "W_timbre": round(float(w_timbre), 6),
                         "W_fluidez": round(float(w_fluidez), 6),
                     },
-                    "ascii_tab": self.render_ascii(sol, sequence),
+                    "ascii_tab": self.render_ascii(sol, sequence, front_bounds=front_bounds),
                     "steps": steps,
                 }
             )
@@ -218,6 +247,41 @@ class TabRenderer:
             current_lines[s] += "|"
         systems.append("\n".join(current_lines))
         return systems
+
+    @staticmethod
+    def _profile_label(
+        solution: ParetoSolution,
+        front_bounds: Optional[FrontBounds] = None,
+    ) -> str:
+        if front_bounds is None:
+            return "[Equilibrada]"
+
+        mins, maxs = front_bounds
+        spans = tuple(maxs[d] - mins[d] for d in range(3))
+        active_dims = [d for d in range(3) if spans[d] > 1e-6]
+        if not active_dims:
+            return "[Equilibrada]"
+
+        values = tuple(float(v) for v in solution.total_cost)
+        normalized = [
+            (values[d] - mins[d]) / spans[d] if spans[d] > 1e-6 else 0.5
+            for d in range(3)
+        ]
+
+        best_dim = min(active_dims, key=lambda d: normalized[d])
+        best_score = normalized[best_dim]
+        other_scores = [normalized[d] for d in active_dims if d != best_dim]
+
+        if best_score <= 0.15 and (not other_scores or min(other_scores) - best_score >= 0.15):
+            return (
+                "[Ergonómica]"
+                if best_dim == 0
+                else "[Tímbrica]"
+                if best_dim == 1
+                else "[Fluidez]"
+            )
+
+        return "[Equilibrada]"
 
     @staticmethod
     def _sanitize_filename(name: str) -> str:

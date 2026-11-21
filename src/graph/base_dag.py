@@ -145,7 +145,14 @@ class PostureGenerator:
                 next_min = min(min_fret, pos.fret)
                 next_max = max(max_fret, pos.fret)
                 if next_max - next_min > self.biomechanics.max_hand_span:
-                    continue
+                    is_distant_register_dyad = (
+                        idx == 1
+                        and len(current) == 1
+                        and abs(pos.string - current[0][1].string) >= 4
+                        and next_max - next_min <= 12
+                    )
+                    if not is_distant_register_dyad:
+                        continue
 
             used_strings.add(pos.string)
             current.append((midi_pitch, pos))
@@ -207,8 +214,14 @@ class PostureGenerator:
         fretted = [a for a in assignments if not a.is_open]
         if len(fretted) <= 1:
             return True
+        if len(fretted) == 2:
+            string_gap = abs(fretted[0].string - fretted[1].string)
+            fret_gap = abs(fretted[0].fret - fretted[1].fret)
+            if string_gap >= 4 and fret_gap <= 12:
+                return True
 
         min_fretted = min(a.fret for a in fretted)
+        max_extra_stretch = max(1, self.biomechanics.max_hand_span - 3)
         by_finger: Dict[int, List[FingerAssignment]] = {}
 
         for i in range(len(fretted)):
@@ -221,7 +234,7 @@ class PostureGenerator:
                 if b.fret < a.fret and b.finger >= a.finger:
                     return False
                 if a.finger != b.finger:
-                    if abs(a.fret - b.fret) > abs(a.finger - b.finger) + 1:
+                    if abs(a.fret - b.fret) > abs(a.finger - b.finger) + max_extra_stretch:
                         return False
 
         # Validación de cejilla cuando un mismo dedo presiona múltiples cuerdas
@@ -247,8 +260,8 @@ class PostureGenerator:
         fretted = [a for a in assignments if not a.is_open]
         if not fretted:
             return 0
-        anchor = min(a.fret - (a.finger - 1) for a in fretted)
-        return max(1, anchor)
+        min_a = min(fretted, key=lambda a: (a.fret, a.finger))
+        return max(1, min_a.fret - (min_a.finger - 1))
 
 
 class BaseDagBuilder:
@@ -256,8 +269,11 @@ class BaseDagBuilder:
         self,
         fretboard: FretboardMap,
         biomechanics: BiomechanicsConfig = DEFAULT_SETTINGS.biomechanics,
+        kinematic_pruning: bool = False,
     ) -> None:
         self.posture_generator = PostureGenerator(fretboard, biomechanics)
+        self.biomechanics = biomechanics
+        self.kinematic_pruning = kinematic_pruning
 
     def build(self, sequence: MusicalSequence) -> LayeredDAG:
         layers: List[Tuple[PostureNode, ...]] = []
@@ -274,8 +290,31 @@ class BaseDagBuilder:
 
         for idx in range(len(layers) - 1):
             next_ids = tuple(node.node_id for node in layers[idx + 1])
+            ioi_sec = max(
+                sequence.events[idx].ioi_sec or sequence.events[idx].max_duration_sec,
+                0.05,
+            )
+            max_shift = max(
+                self.biomechanics.base_hand_shift,
+                int(
+                    self.biomechanics.base_hand_shift
+                    + self.biomechanics.hand_shift_velocity_rate * ioi_sec
+                ),
+            )
+
             for node in layers[idx]:
-                adjacency[node.node_id] = next_ids
+                if not self.kinematic_pruning:
+                    adjacency[node.node_id] = next_ids
+                    continue
+
+                targets = tuple(
+                    next_node.node_id
+                    for next_node in layers[idx + 1]
+                    if node.hand_position == 0
+                    or next_node.hand_position == 0
+                    or abs(next_node.hand_position - node.hand_position) <= max_shift
+                )
+                adjacency[node.node_id] = targets if targets else next_ids
 
         for node in layers[-1]:
             adjacency[node.node_id] = (SINK_NODE_ID,)

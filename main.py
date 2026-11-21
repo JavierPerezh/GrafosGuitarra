@@ -11,7 +11,14 @@ from src.graph.cost_vector import CostVectorEvaluator
 from src.graph.dual_graph import DualGraphBuilder
 from src.ingestion.midi_xml_parser import MidiXmlScoreParser
 from src.ingestion.parser_interface import ScoreParsingError
-from src.optimization.namoa_star import NamoaStarResult, NamoaStarSolver
+from src.optimization.namoa_star import (
+    NamoaStarResult,
+    NamoaStarSolver,
+    ParetoSolution,
+    select_diverse_solutions,
+)
+from src.optimization.pareto_dominance import dominates
+from src.optimization.segmented_solver import SegmentedNamoaSolver
 from src.presentation.tab_renderer import TabRenderer
 
 
@@ -30,23 +37,36 @@ def run_pipeline(
     parser = MidiXmlScoreParser()
     sequence = parser.parse(input_path)
 
-    # 2. Construcción del DAG base y filtrado anatómico intra-capa
-    fretboard = FretboardMap(settings.physics)
-    base_builder = BaseDagBuilder(fretboard, settings.biomechanics)
-    base_dag = base_builder.build(sequence)
+    if len(sequence) > 20:
+        seg_solver = SegmentedNamoaSolver(
+            settings=settings,
+            max_solutions=max_solutions,
+        )
+        result = seg_solver.solve(sequence)
+        base_dag = None
+        dual_graph = None
+    else:
+        # 2. Construcción del DAG base y filtrado anatómico intra-capa
+        fretboard = FretboardMap(settings.physics)
+        base_builder = BaseDagBuilder(
+            fretboard,
+            settings.biomechanics,
+            kinematic_pruning=len(sequence) > 12,
+        )
+        base_dag = base_builder.build(sequence)
 
-    # 3. Transformación al Grafo de Estados Compuestos (memoria inercial)
-    cost_evaluator = CostVectorEvaluator(
-        fretboard=fretboard,
-        weights=settings.cost_weights,
-        biomechanics=settings.biomechanics,
-    )
-    dual_builder = DualGraphBuilder(cost_evaluator)
-    dual_graph = dual_builder.build(base_dag, sequence)
+        # 3. Transformación al Grafo de Estados Compuestos (memoria inercial)
+        cost_evaluator = CostVectorEvaluator(
+            fretboard=fretboard,
+            weights=settings.cost_weights,
+            biomechanics=settings.biomechanics,
+        )
+        dual_builder = DualGraphBuilder(cost_evaluator)
+        dual_graph = dual_builder.build(base_dag, sequence)
 
-    # 4. Búsqueda multiobjetivo NAMOA*
-    solver = NamoaStarSolver(max_solutions=max_solutions)
-    result = solver.solve(dual_graph)
+        # 4. Búsqueda multiobjetivo NAMOA*
+        solver = NamoaStarSolver(max_solutions=max_solutions)
+        result = solver.solve(dual_graph)
 
     # 5. Renderizado y exportación de reportes
     renderer = TabRenderer(
@@ -64,11 +84,17 @@ def run_pipeline(
     elapsed_ms = (time.perf_counter() - t0) * 1000.0
 
     if verbose:
-        print(
-            f"[G08] Pieza: '{sequence.title}' | Capas: {base_dag.num_layers} | "
-            f"DAG base: ({base_dag.num_posture_nodes} nodos, {base_dag.num_edges} aristas) | "
-            f"Grafo dual: ({dual_graph.num_compound_nodes} nodos, {dual_graph.num_edges} aristas)"
-        )
+        if base_dag is not None and dual_graph is not None:
+            print(
+                f"[G08] Pieza: '{sequence.title}' | Capas: {base_dag.num_layers} | "
+                f"DAG base: ({base_dag.num_posture_nodes} nodos, {base_dag.num_edges} aristas) | "
+                f"Grafo dual: ({dual_graph.num_compound_nodes} nodos, {dual_graph.num_edges} aristas)"
+            )
+        else:
+            print(
+                f"[G08] Pieza: '{sequence.title}' | Eventos: {len(sequence)} | "
+                "Ejecución: segmentación por compases"
+            )
         print(
             f"[G08] Soluciones Pareto: {len(result.solutions)} | "
             f"Tiempo total: {elapsed_ms:.2f} ms"
@@ -77,6 +103,104 @@ def run_pipeline(
         print(renderer.render_all_ascii(result, sequence))
 
     return result, txt_file, json_file
+
+
+def _filter_segment_solutions(solutions: list[ParetoSolution]) -> list[ParetoSolution]:
+    frontier: list[ParetoSolution] = []
+    for candidate in solutions:
+        if any(
+            dominates(existing.total_cost, candidate.total_cost)
+            for existing in frontier
+        ):
+            continue
+        frontier = [
+            existing
+            for existing in frontier
+            if not dominates(candidate.total_cost, existing.total_cost)
+        ]
+        frontier.append(candidate)
+    return frontier
+
+
+def _solve_segmented_pipeline(
+    sequence,
+    parser: MidiXmlScoreParser,
+    settings: InstrumentSettings,
+    max_solutions: Optional[int],
+) -> Tuple[NamoaStarResult, object, object]:
+    fretboard = FretboardMap(settings.physics)
+    cost_evaluator = CostVectorEvaluator(
+        fretboard=fretboard,
+        weights=settings.cost_weights,
+        biomechanics=settings.biomechanics,
+    )
+    segments = parser.segment_sequence(sequence, settings)
+    combined: list[ParetoSolution] = []
+    expanded = generated = pruned = 0
+
+    for segment_idx, segment in enumerate(segments):
+        base_builder = BaseDagBuilder(
+            fretboard,
+            settings.biomechanics,
+            kinematic_pruning=len(segment) > 12,
+        )
+        base_dag = base_builder.build(segment)
+        dual_builder = DualGraphBuilder(cost_evaluator)
+        dual_graph = dual_builder.build(base_dag, segment)
+        segment_result = NamoaStarSolver(max_solutions=None).solve(dual_graph)
+        expanded += segment_result.expanded_labels
+        generated += segment_result.generated_labels
+        pruned += segment_result.pruned_labels
+
+        if not segment_result.solutions:
+            continue
+
+        if segment_idx == 0:
+            combined = [
+                ParetoSolution(
+                    solution_id=idx + 1,
+                    total_cost=sol.total_cost,
+                    compound_path=sol.compound_path,
+                    posture_sequence=sol.posture_sequence,
+                )
+                for idx, sol in enumerate(segment_result.solutions)
+            ]
+            continue
+
+        previous_segment = segments[segment_idx - 1]
+        chained: list[ParetoSolution] = []
+        for previous in combined:
+            previous_posture = previous.posture_sequence[-1]
+            previous_event = previous_segment.events[-1]
+            for sol in segment_result.solutions:
+                first_posture = sol.posture_sequence[0]
+                first_event = segment.events[0]
+                boundary_cost = cost_evaluator.evaluate_first_order(
+                    curr_node=previous_posture,
+                    next_node=first_posture,
+                    curr_event=previous_event,
+                    next_event=first_event,
+                )
+                total = tuple(
+                    previous.total_cost[i] + float(boundary_cost[i]) + float(sol.total_cost[i])
+                    for i in range(3)
+                )
+                chained.append(
+                    ParetoSolution(
+                        solution_id=len(chained) + 1,
+                        total_cost=(total[0], total[1], total[2]),
+                        compound_path=previous.compound_path + sol.compound_path,
+                        posture_sequence=previous.posture_sequence + sol.posture_sequence,
+                    )
+                )
+        combined = _filter_segment_solutions(chained)
+
+    selected = select_diverse_solutions(tuple(combined), max_solutions)
+    reindexed = tuple(
+        ParetoSolution(idx + 1, sol.total_cost, sol.compound_path, sol.posture_sequence)
+        for idx, sol in enumerate(selected)
+    )
+    return NamoaStarResult(reindexed, expanded, generated, pruned), base_dag, dual_graph
 
 
 def _build_arg_parser() -> argparse.ArgumentParser:
