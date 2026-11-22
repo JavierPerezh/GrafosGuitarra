@@ -1,0 +1,2713 @@
+{
+  "title": "romance_step1_1compas",
+  "tempo_bpm": 100.0,
+  "num_events": 9,
+  "search_stats": {
+    "pareto_solutions": 20,
+    "expanded_labels": 1089,
+    "generated_labels": 2280,
+    "pruned_labels": 14539
+  },
+  "solutions": [
+    {
+      "solution_id": 1,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 0.72,
+        "W_timbre": 4.259173,
+        "W_fluidez": 0.6
+      },
+      "ascii_tab": "=== Opción Pareto #1 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=0.720, W_timbre=4.259, W_fluidez=0.600]\n\ne|---------7-----7-----|\nB|--12-0-----0-----0---|\nG|-------0-----0-----0-|\nD|---------------------|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 2,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 0.9825,
+        "W_timbre": 5.241209,
+        "W_fluidez": 0.5
+      },
+      "ascii_tab": "=== Opción Pareto #2 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=0.982, W_timbre=5.241, W_fluidez=0.500]\n\ne|---------7-----7-----|\nB|--12-0-----0-----0---|\nG|-------0-----0-------|\nD|-------------------5-|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 3,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 2.874762,
+        "W_timbre": 4.145594,
+        "W_fluidez": 0.5
+      },
+      "ascii_tab": "=== Opción Pareto #3 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=2.875, W_timbre=4.146, W_fluidez=0.500]\n\ne|---------7-----7-----|\nB|--12-0-----0---------|\nG|-------0-----0---4-0-|\nD|---------------------|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 4,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 3.137262,
+        "W_timbre": 5.12763,
+        "W_fluidez": 0.4
+      },
+      "ascii_tab": "=== Opción Pareto #4 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=3.137, W_timbre=5.128, W_fluidez=0.400]\n\ne|---------7-----7-----|\nB|--12-0-----------0---|\nG|-------0---4-0-------|\nD|-------------------5-|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 5,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 4.089643,
+        "W_timbre": 4.362831,
+        "W_fluidez": 0.4
+      },
+      "ascii_tab": "=== Opción Pareto #5 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=4.090, W_timbre=4.363, W_fluidez=0.400]\n\ne|---------7-----7-----|\nB|--12-0-----0---------|\nG|-------0-----0---4---|\nD|-------------------5-|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 6,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 5.029524,
+        "W_timbre": 4.032014,
+        "W_fluidez": 0.4
+      },
+      "ascii_tab": "=== Opción Pareto #6 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=5.030, W_timbre=4.032, W_fluidez=0.400]\n\ne|---------7-----7-----|\nB|--12-0---------------|\nG|-------0---4-0---4-0-|\nD|---------------------|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 7,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 5.292024,
+        "W_timbre": 5.066412,
+        "W_fluidez": 0.3
+      },
+      "ascii_tab": "=== Opción Pareto #7 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=5.292, W_timbre=5.066, W_fluidez=0.300]\n\ne|--7-----7-----7-----|\nB|----------------0---|\nG|----4-0---4-0-------|\nD|------------------5-|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 8,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 6.244405,
+        "W_timbre": 4.249252,
+        "W_fluidez": 0.3
+      },
+      "ascii_tab": "=== Opción Pareto #8 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=6.244, W_timbre=4.249, W_fluidez=0.300]\n\ne|---------7-----7-----|\nB|--12-0---------------|\nG|-------0---4-0---4---|\nD|-------------------5-|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 12,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 9,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 7.184286,
+        "W_timbre": 3.970797,
+        "W_fluidez": 0.3
+      },
+      "ascii_tab": "=== Opción Pareto #9 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=7.184, W_timbre=3.971, W_fluidez=0.300]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----4-0---4-0---4-0-|\nD|--------------------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 10,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 8.399167,
+        "W_timbre": 4.188034,
+        "W_fluidez": 0.2
+      },
+      "ascii_tab": "=== Opción Pareto #10 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=8.399, W_timbre=4.188, W_fluidez=0.200]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----4-0---4-0---4---|\nD|------------------5-|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 11,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 11.446786,
+        "W_timbre": 4.054109,
+        "W_fluidez": 0.2
+      },
+      "ascii_tab": "=== Opción Pareto #11 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=11.447, W_timbre=4.054, W_fluidez=0.200]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----4-----4-0---4-0-|\nD|------5-------------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 12,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 12.466905,
+        "W_timbre": 3.854071,
+        "W_fluidez": 0.9
+      },
+      "ascii_tab": "=== Opción Pareto #12 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=12.467, W_timbre=3.854, W_fluidez=0.900]\n\ne|--7-----7-----7-----|\nB|----------0---------|\nG|------------0---4-0-|\nD|----9-5-------------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 13,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 12.661667,
+        "W_timbre": 4.271347,
+        "W_fluidez": 0.1
+      },
+      "ascii_tab": "=== Opción Pareto #13 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=12.662, W_timbre=4.271, W_fluidez=0.100]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----4-----4-0---4---|\nD|------5-----------5-|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 14,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 16.090238,
+        "W_timbre": 4.137422,
+        "W_fluidez": 0.1
+      },
+      "ascii_tab": "=== Opción Pareto #14 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=16.090, W_timbre=4.137, W_fluidez=0.100]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----4-----4-----4-0-|\nD|------5-----5-------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 15,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 16.184524,
+        "W_timbre": 3.740492,
+        "W_fluidez": 1.4
+      },
+      "ascii_tab": "=== Opción Pareto #15 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=16.185, W_timbre=3.740, W_fluidez=1.400]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----------4-0---4-0-|\nD|----9-5-------------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 16,
+      "profile": "[Fluidez]",
+      "cost_vector": {
+        "W_bio": 17.305119,
+        "W_timbre": 4.354659,
+        "W_fluidez": 0.0
+      },
+      "ascii_tab": "=== Opción Pareto #16 [Fluidez] | romance_step1_1compas ===\nCosto [W_bio=17.305, W_timbre=4.355, W_fluidez=0.000]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----4-----4-----4---|\nD|------5-----5-----5-|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 17,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 24.232738,
+        "W_timbre": 3.623766,
+        "W_fluidez": 2.0
+      },
+      "ascii_tab": "=== Opción Pareto #17 [Equilibrada] | romance_step1_1compas ===\nCosto [W_bio=24.233, W_timbre=3.624, W_fluidez=2.000]\n\ne|--7-----7-----7-----|\nB|----------------0---|\nG|------------------0-|\nD|----9-5---9-5-------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 18,
+      "profile": "[Tímbrica]",
+      "cost_vector": {
+        "W_bio": 28.173214,
+        "W_timbre": 3.510187,
+        "W_fluidez": 2.5
+      },
+      "ascii_tab": "=== Opción Pareto #18 [Tímbrica] | romance_step1_1compas ===\nCosto [W_bio=28.173, W_timbre=3.510, W_fluidez=2.500]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|----------------4-0-|\nD|----9-5---9-5-------|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 19,
+      "profile": "[Tímbrica]",
+      "cost_vector": {
+        "W_bio": 34.822262,
+        "W_timbre": 3.413807,
+        "W_fluidez": 3.0
+      },
+      "ascii_tab": "=== Opción Pareto #19 [Tímbrica] | romance_step1_1compas ===\nCosto [W_bio=34.822, W_timbre=3.414, W_fluidez=3.000]\n\ne|--7-----7-----7-----|\nB|--------------------|\nG|--------------------|\nD|----9-5---9-5---9-5-|\nA|--------------------|\nE|--0-----------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 20,
+      "profile": "[Tímbrica]",
+      "cost_vector": {
+        "W_bio": 109.45818,
+        "W_timbre": 3.337045,
+        "W_fluidez": 5.25
+      },
+      "ascii_tab": "=== Opción Pareto #20 [Tímbrica] | romance_step1_1compas ===\nCosto [W_bio=109.458, W_timbre=3.337, W_fluidez=5.250]\n\ne|---------7-----7-----|\nB|---------------------|\nG|---------------------|\nD|--21-9-5---9-5---9-5-|\nA|---------------------|\nE|--0------------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 18,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 21,
+              "finger": 4,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.21,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 1,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.385,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.595,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 0.805,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.015,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 1.19,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 1.4,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 9,
+              "finger": 4,
+              "midi_pitch": 59
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 1.61,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 4,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 55
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

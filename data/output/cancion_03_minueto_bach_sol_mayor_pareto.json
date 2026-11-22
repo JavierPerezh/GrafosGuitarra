@@ -1,0 +1,965 @@
+{
+  "title": "cancion_03_minueto_bach_sol_mayor",
+  "tempo_bpm": 116.0,
+  "num_events": 64,
+  "search_stats": {
+    "pareto_solutions": 1,
+    "expanded_labels": 545,
+    "generated_labels": 1069,
+    "pruned_labels": 5306
+  },
+  "solutions": [
+    {
+      "solution_id": 1,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 734.543523,
+        "W_timbre": 44.647227,
+        "W_fluidez": 23.35
+      },
+      "ascii_tab": "=== Opción Pareto #1 [Equilibrada] | cancion_03_minueto_bach_sol_mayor ===\nCosto [W_bio=734.544, W_timbre=44.647, W_fluidez=23.350]\n\ne|--10-3-5-7-8-10-----12-8-10-12-14-15-3-3-8-10-8-7-5-7-8-7-5-3---3-5-7-3-5-|\nB|----------------8-8-------------------------------------------7-----------|\nG|--------------------------------------------------------------------------|\nD|------------------------------------------------------------------------0-|\nA|-----------------------------------------3--------------------0-----------|\nE|--3----------3------8-------------3-----------------7---------------------|\n\ne|--10-3-5-7-8-10-3-3-12-8-10-12-14-15-3-3-8-10-8-7-5-7-8-7-5-3-5-7-5-3-2-3-|\nB|------------------------------------------------------------------------0-|\nG|------------------------------------------------------------------------0-|\nD|--------------------------------------------------------------0-----------|\nA|-----------------------------------------3--------------------------------|\nE|--3----------3------8-------------3-----------------7-------------------3-|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 2,
+              "midi_pitch": 74
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 43
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.517241,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.775862,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 1.034483,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 1.293103,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_sec": 1.551724,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 1,
+              "midi_pitch": 74
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 43
+            }
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_sec": 2.068966,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_sec": 2.586207,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_sec": 3.103448,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 12,
+              "finger": 1,
+              "midi_pitch": 76
+            },
+            {
+              "string": 6,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 48
+            }
+          ]
+        },
+        {
+          "event_index": 9,
+          "onset_sec": 3.62069,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 10,
+          "onset_sec": 3.87931,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 4,
+              "midi_pitch": 74
+            }
+          ]
+        },
+        {
+          "event_index": 11,
+          "onset_sec": 4.137931,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 12,
+              "finger": 4,
+              "midi_pitch": 76
+            }
+          ]
+        },
+        {
+          "event_index": 12,
+          "onset_sec": 4.396552,
+          "hand_position": 11,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 14,
+              "finger": 4,
+              "midi_pitch": 78
+            }
+          ]
+        },
+        {
+          "event_index": 13,
+          "onset_sec": 4.655172,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 15,
+              "finger": 4,
+              "midi_pitch": 79
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 43
+            }
+          ]
+        },
+        {
+          "event_index": 14,
+          "onset_sec": 5.172414,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 15,
+          "onset_sec": 5.689655,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 16,
+          "onset_sec": 6.206897,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 2,
+              "midi_pitch": 72
+            },
+            {
+              "string": 5,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 48
+            }
+          ]
+        },
+        {
+          "event_index": 17,
+          "onset_sec": 6.724138,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 4,
+              "midi_pitch": 74
+            }
+          ]
+        },
+        {
+          "event_index": 18,
+          "onset_sec": 6.982759,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 2,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 19,
+          "onset_sec": 7.241379,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 1,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 20,
+          "onset_sec": 7.5,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 21,
+          "onset_sec": 7.758621,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 47
+            }
+          ]
+        },
+        {
+          "event_index": 22,
+          "onset_sec": 8.275862,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 23,
+          "onset_sec": 8.534483,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 24,
+          "onset_sec": 8.793103,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 25,
+          "onset_sec": 9.051724,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 26,
+          "onset_sec": 9.310345,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 66
+            },
+            {
+              "string": 5,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 45
+            }
+          ]
+        },
+        {
+          "event_index": 27,
+          "onset_sec": 9.827586,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 28,
+          "onset_sec": 10.086207,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 3,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 29,
+          "onset_sec": 10.344828,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 30,
+          "onset_sec": 10.603448,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 31,
+          "onset_sec": 10.862069,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 3,
+              "midi_pitch": 69
+            },
+            {
+              "string": 4,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 50
+            }
+          ]
+        },
+        {
+          "event_index": 32,
+          "onset_sec": 12.413793,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 4,
+              "midi_pitch": 74
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 43
+            }
+          ]
+        },
+        {
+          "event_index": 33,
+          "onset_sec": 12.931034,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 34,
+          "onset_sec": 13.189655,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 3,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 35,
+          "onset_sec": 13.448276,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 36,
+          "onset_sec": 13.706897,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 37,
+          "onset_sec": 13.965517,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 4,
+              "midi_pitch": 74
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 43
+            }
+          ]
+        },
+        {
+          "event_index": 38,
+          "onset_sec": 14.482759,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 39,
+          "onset_sec": 15.0,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 40,
+          "onset_sec": 15.517241,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 12,
+              "finger": 2,
+              "midi_pitch": 76
+            },
+            {
+              "string": 6,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 48
+            }
+          ]
+        },
+        {
+          "event_index": 41,
+          "onset_sec": 16.034483,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 42,
+          "onset_sec": 16.293103,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 4,
+              "midi_pitch": 74
+            }
+          ]
+        },
+        {
+          "event_index": 43,
+          "onset_sec": 16.551724,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 12,
+              "finger": 4,
+              "midi_pitch": 76
+            }
+          ]
+        },
+        {
+          "event_index": 44,
+          "onset_sec": 16.810345,
+          "hand_position": 11,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 14,
+              "finger": 4,
+              "midi_pitch": 78
+            }
+          ]
+        },
+        {
+          "event_index": 45,
+          "onset_sec": 17.068966,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 15,
+              "finger": 4,
+              "midi_pitch": 79
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 43
+            }
+          ]
+        },
+        {
+          "event_index": 46,
+          "onset_sec": 17.586207,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 47,
+          "onset_sec": 18.103448,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 48,
+          "onset_sec": 18.62069,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 2,
+              "midi_pitch": 72
+            },
+            {
+              "string": 5,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 48
+            }
+          ]
+        },
+        {
+          "event_index": 49,
+          "onset_sec": 19.137931,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 10,
+              "finger": 4,
+              "midi_pitch": 74
+            }
+          ]
+        },
+        {
+          "event_index": 50,
+          "onset_sec": 19.396552,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 2,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 51,
+          "onset_sec": 19.655172,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 1,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 52,
+          "onset_sec": 19.913793,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 53,
+          "onset_sec": 20.172414,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            },
+            {
+              "string": 6,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 47
+            }
+          ]
+        },
+        {
+          "event_index": 54,
+          "onset_sec": 20.689655,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 8,
+              "finger": 4,
+              "midi_pitch": 72
+            }
+          ]
+        },
+        {
+          "event_index": 55,
+          "onset_sec": 20.948276,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 3,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 56,
+          "onset_sec": 21.206897,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 57,
+          "onset_sec": 21.465517,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 58,
+          "onset_sec": 21.724138,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 3,
+              "midi_pitch": 69
+            },
+            {
+              "string": 4,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 50
+            }
+          ]
+        },
+        {
+          "event_index": 59,
+          "onset_sec": 22.241379,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        },
+        {
+          "event_index": 60,
+          "onset_sec": 22.5,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 61,
+          "onset_sec": 22.758621,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 1,
+              "midi_pitch": 67
+            }
+          ]
+        },
+        {
+          "event_index": 62,
+          "onset_sec": 23.017241,
+          "hand_position": 2,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 2,
+              "finger": 1,
+              "midi_pitch": 66
+            }
+          ]
+        },
+        {
+          "event_index": 63,
+          "onset_sec": 23.275862,
+          "hand_position": 2,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 3,
+              "finger": 2,
+              "midi_pitch": 67
+            },
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            },
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            },
+            {
+              "string": 6,
+              "fret": 3,
+              "finger": 2,
+              "midi_pitch": 43
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

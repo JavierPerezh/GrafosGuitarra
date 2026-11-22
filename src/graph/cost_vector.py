@@ -64,10 +64,6 @@ class CostVectorEvaluator:
             next_event=next_event,
         )
 
-        # En DualGraphBuilder, prev_node (evento t_0) nunca entra como next_node.
-        # Cuando curr_event.index == 1 (primera arista dual), evaluamos el costo de entrada a t_0:
-        # - Si es el inicio de la obra (initial_posture is None): costo postural estático de t_0.
-        # - Si es la continuación tras un compás previo: transición real desde initial_posture -> t_0.
         if curr_event.index == 1:
             if self.initial_posture is None:
                 init_bio, init_timbre = self._compute_initial_posture_cost(prev_node)
@@ -123,12 +119,14 @@ class CostVectorEvaluator:
 
         excess_span = max(0, node.fret_span - self.biomechanics.relaxed_hand_span)
         stretch_cost = w.lambda_stretch * (excess_span ** 2)
+        if node.fret_span > self.biomechanics.max_hand_span:
+            stretch_cost += 18.0 * ((node.fret_span - self.biomechanics.max_hand_span) ** 2)
 
         fw = self.biomechanics.finger_fatigue_weights
         fatigue_cost = (
             sum(fw.get(a.finger, 1.0) for a in node.assignments if not a.is_open) * 0.25
         )
-        initial_entry = 0.30 * max(0, node.hand_position - 5) if node.hand_position > 0 else 0.0
+        initial_entry = 0.35 * max(0, node.hand_position - 5) if node.hand_position > 0 else 0.0
         return float(position_cost + stretch_cost + fatigue_cost + initial_entry), float(timbre_cost)
 
     def _compute_biomechanical_cost(
@@ -221,17 +219,19 @@ class CostVectorEvaluator:
                     roll_factor = 0.5 if (a_curr.fret == a_next.fret and abs(s_diff) == 1) else 1.0
                     string_work += w.same_finger_hop_penalty * roll_factor * speed_factor
 
-        # 6. Penalización por cuerdas interiores saltadas en acordes
+        # 6. Penalización por cuerdas interiores saltadas en acordes (>= 3 notas)
         skip_cost = 0.0
-        if len(next_node.assignments) >= 2:
+        if len(next_node.assignments) >= 3:
             used_strings = sorted(a.string for a in next_node.assignments)
             interior_gaps = (used_strings[-1] - used_strings[0] + 1) - len(used_strings)
             if interior_gaps > 0:
                 skip_cost = w.interior_string_skip_penalty * interior_gaps
 
-        # 7. Elongación intra-postura
+        # 7. Elongación intra-postura y castigo por hiper-extensión excepcional
         excess_span = max(0, next_node.fret_span - self.biomechanics.relaxed_hand_span)
         stretch_cost = w.lambda_stretch * (excess_span ** 2)
+        if next_node.fret_span > self.biomechanics.max_hand_span:
+            stretch_cost += 18.0 * ((next_node.fret_span - self.biomechanics.max_hand_span) ** 2)
 
         # 8. Fatiga digital acumulada
         fw = self.biomechanics.finger_fatigue_weights
@@ -290,7 +290,7 @@ class CostVectorEvaluator:
             if a_curr.midi_pitch == a_next.midi_pitch and a_curr.string != a_next.string:
                 timbre_cost += 0.5 * w.theta_string_change * voice_change_factor
 
-        if len(next_node.assignments) >= 2:
+        if len(next_node.assignments) >= 3:
             used_strings = sorted(a.string for a in next_node.assignments)
             interior_gaps = (used_strings[-1] - used_strings[0] + 1) - len(used_strings)
             if interior_gaps > 0:
@@ -402,8 +402,12 @@ class CostVectorEvaluator:
             for idx, a_next in enumerate(next_assignments):
                 if idx in used_next:
                     continue
-                same_string_penalty = 0 if a_curr.string == a_next.string else 1
                 pitch_diff = abs(a_curr.midi_pitch - a_next.midi_pitch)
+                string_diff = abs(a_curr.string - a_next.string)
+                # No emparejar salto directo bajo <-> melodía como si fuera el mismo dedo
+                if pitch_diff >= 7 and string_diff >= 3:
+                    continue
+                same_string_penalty = 0 if a_curr.string == a_next.string else 1
                 score = (same_string_penalty, pitch_diff)
                 if score < best_score:
                     best_score = score

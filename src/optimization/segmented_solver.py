@@ -12,6 +12,7 @@ from src.optimization.namoa_star import (
     NamoaStarResult,
     NamoaStarSolver,
     ParetoSolution,
+    _open_bridge_cost,
     deduplicate_by_tab_geometry,
     select_diverse_solutions,
 )
@@ -68,14 +69,11 @@ class MeasureAwareSegmenter:
         beat_sec = sec_per_quarter * (4.0 / max(den, 1))
         bar_sec = max(beat_sec * max(num, 1), 0.1)
 
-        # 1. Agrupa eventos por número de compás
         bars_map: Dict[int, List[MusicalEvent]] = {}
         for ev in sequence.events:
             bar_idx = int((ev.onset_sec + 1e-4) // bar_sec)
             bars_map.setdefault(bar_idx, []).append(ev)
 
-        # 2. Si un único compás excede max_events (ej. 16 semicorcheas en 4/4),
-        #    subdivide por tiempos/pulsos dentro del mismo compás.
         atomic_chunks: List[Tuple[int, List[MusicalEvent]]] = []
         for bar_idx in sorted(bars_map):
             bar_events = bars_map[bar_idx]
@@ -105,8 +103,6 @@ class MeasureAwareSegmenter:
             if sub_chunk:
                 atomic_chunks.append((bar_idx, sub_chunk))
 
-        # 3. Fusiona compases consecutivos mientras quepan en max_events
-        #    y no haya un silencio largo de frase entre ellos.
         merged_groups: List[Tuple[int, int, List[MusicalEvent]]] = []
         curr_start_bar, curr_events = atomic_chunks[0]
         curr_end_bar = curr_start_bar
@@ -130,7 +126,6 @@ class MeasureAwareSegmenter:
 
         merged_groups.append((curr_start_bar, curr_end_bar, curr_events))
 
-        # 4. Construye sub-secuencias normalizadas preservando el IOI real de cada evento
         segments: List[MeasureSegment] = []
         for seg_idx, (b_start, b_end, ev_list) in enumerate(merged_groups):
             base_onset = ev_list[0].onset_sec
@@ -148,7 +143,6 @@ class MeasureAwareSegmenter:
                 tempo_bpm=sequence.tempo_bpm,
                 metadata=dict(sequence.metadata),
             )
-            # Restaura el IOI del último evento del segmento hacia el siguiente compás
             if ev_list[-1].ioi_sec is not None:
                 fixed_last = replace(sub_seq.events[-1], ioi_sec=ev_list[-1].ioi_sec)
                 object.__setattr__(
@@ -168,7 +162,7 @@ class MeasureAwareSegmenter:
 
 
 class SegmentedNamoaSolver:
-    """Orquesta NAMOA* por compases con continuidad postural entre fronteras."""
+    """Orquesta NAMOA* por compases propagando múltiples perfiles de Pareto."""
 
     def __init__(
         self,
@@ -198,12 +192,12 @@ class SegmentedNamoaSolver:
         total_generated = 0
         total_pruned = 0
 
-        # Segmento 0: inicializa trayectorias por perfil de Pareto
+        # Segmento 0: calcula el frente exacto inicial y arranca pistas por perfil
         first_res = self._solve_single_segment(
             segments[0].sequence,
             initial_posture=None,
             initial_fretted_posture=None,
-            max_k=max(self.max_solutions, 5),
+            max_k=max(self.max_solutions or 5, 5),
         )
         total_expanded += first_res.expanded_labels
         total_generated += first_res.generated_labels
@@ -212,13 +206,15 @@ class SegmentedNamoaSolver:
         if not first_res.solutions:
             return NamoaStarResult((), total_expanded, total_generated, total_pruned)
 
-        tracks = self._init_tracks(first_res.solutions)[:1]
+        target_tracks = min(max(self.max_solutions or 4, 4), 5)
+        tracks = self._init_tracks(first_res.solutions)[:target_tracks]
 
-        # Segmentos posteriores: encadena un perfil equilibrado para mantener rendimiento lineal
+        # Segmentos posteriores: encadena cada perfil respetando su criterio objetivo
         for seg in segments[1:]:
             for track in tracks:
-                seg_res = self._solve_greedy_segment(
+                seg_res = self._solve_profile_segment(
                     seg.sequence,
+                    profile=track.profile,
                     initial_posture=track.last_posture,
                     initial_fretted_posture=track.last_fretted_posture,
                 )
@@ -229,7 +225,7 @@ class SegmentedNamoaSolver:
                 if not seg_res.solutions:
                     continue
 
-                chosen = self._pick_for_profile(seg_res.solutions, track.profile)
+                chosen = seg_res.solutions[0]
                 track.total_cost = (
                     track.total_cost[0] + chosen.total_cost[0],
                     track.total_cost[1] + chosen.total_cost[1],
@@ -292,7 +288,6 @@ class SegmentedNamoaSolver:
             initial_fretted_posture=initial_fretted_posture,
         )
 
-        # Caso borde: segmento final de 1 solo evento (ej. acorde final de cierre)
         if len(sub_sequence.events) == 1:
             candidates = base_dag.layers[0]
             single_sols: List[ParetoSolution] = []
@@ -379,7 +374,6 @@ class SegmentedNamoaSolver:
         if profile == "fluency":
             return min(solutions, key=lambda s: (s.total_cost[2], s.total_cost[0], s.total_cost[1]))
 
-        # Equilibrada: distancia euclidiana normalizada al punto utópico
         mins = tuple(min(s.total_cost[d] for s in solutions) for d in range(3))
         maxs = tuple(max(s.total_cost[d] for s in solutions) for d in range(3))
         spans = tuple(max(maxs[d] - mins[d], 1e-9) for d in range(3))
@@ -411,9 +405,22 @@ class SegmentedNamoaSolver:
             kept.append(cand)
         return tuple(kept) if kept else solutions
 
-    def _solve_greedy_segment(
+    @staticmethod
+    def _profile_weights(profile: str) -> Tuple[float, float, float]:
+        if profile == "ergonomic":
+            return (1.0, 0.15, 0.25)
+        if profile == "timbral":
+            return (0.25, 1.0, 0.25)
+        if profile == "fluency":
+            return (0.30, 0.20, 1.0)
+        if profile == "balanced_alt":
+            return (0.65, 0.55, 0.50)
+        return (0.55, 0.45, 0.45)
+
+    def _solve_profile_segment(
         self,
         sub_sequence: MusicalSequence,
+        profile: str,
         initial_posture: Optional[PostureNode],
         initial_fretted_posture: Optional[PostureNode],
     ) -> NamoaStarResult:
@@ -431,99 +438,81 @@ class SegmentedNamoaSolver:
             initial_fretted_posture=initial_fretted_posture,
         )
 
+        w_bio_k, w_tim_k, w_flu_k = self._profile_weights(profile)
         selected: List[PostureNode] = []
         total = [0.0, 0.0, 0.0]
-        prev_prev: Optional[PostureNode] = initial_fretted_posture
+        last_fretted: Optional[PostureNode] = initial_fretted_posture
 
         for idx, event in enumerate(sub_sequence.events):
             candidates = base_dag.layers[idx]
-            scored = []
+            scored: List[Tuple[float, Tuple[float, float, float], PostureNode]] = []
+
             for node in candidates:
                 if idx == 0:
                     if initial_posture is None:
                         bio, timbre = evaluator._compute_initial_posture_cost(node)
-                        cost = (bio, timbre, 0.0)
+                        cost_vec = (bio, timbre, 0.0)
                     else:
-                        cost = evaluator.evaluate_first_order(
+                        raw = evaluator.evaluate_first_order(
                             initial_posture,
                             node,
                             sub_sequence.events[0],
                             event,
                         )
+                        bridge = _open_bridge_cost(last_fretted, initial_posture, node)
+                        cost_vec = (
+                            float(raw[0]) + bridge[0],
+                            float(raw[1]) + bridge[1],
+                            float(raw[2]) + bridge[2],
+                        )
                 else:
                     prev_node = selected[-1]
                     prev_event = sub_sequence.events[idx - 1]
-                    if prev_prev is None:
-                        cost = evaluator.evaluate_first_order(
+                    anchor = prev_node if prev_node.hand_position > 0 else last_fretted
+                    if anchor is None:
+                        raw = evaluator.evaluate_first_order(
                             prev_node,
                             node,
                             prev_event,
                             event,
                         )
                     else:
-                        cost = evaluator.evaluate_second_order(
-                            prev_prev,
+                        raw = evaluator.evaluate_second_order(
+                            anchor,
                             prev_node,
                             node,
                             prev_event,
                             event,
                         )
-                score = float(cost[0] + cost[1] + cost[2])
-                if len(node.assignments) == 1:
-                    assignment = node.assignments[0]
-                    if not assignment.is_open:
-                        score += 10.0 * assignment.fret
-                else:
-                    for assignment in node.assignments:
-                        if assignment.midi_pitch == 67 and not assignment.is_open:
-                            score += 10.0 * assignment.fret
-                scored.append((score, node))
+                    bridge = _open_bridge_cost(last_fretted, prev_node, node)
+                    cost_vec = (
+                        float(raw[0]) + bridge[0],
+                        float(raw[1]) + bridge[1],
+                        float(raw[2]) + bridge[2],
+                    )
 
-            _, chosen = min(
+                scalar_score = (
+                    w_bio_k * cost_vec[0]
+                    + w_tim_k * cost_vec[1]
+                    + w_flu_k * cost_vec[2]
+                )
+                scored.append((scalar_score, cost_vec, node))
+
+            _, best_cost, chosen = min(
                 scored,
-                key=lambda item: (item[0], item[1].node_id),
+                key=lambda item: (item[0], item[2].node_id),
             )
 
-            if idx == 0:
-                if initial_posture is None:
-                    bio, timbre = evaluator._compute_initial_posture_cost(chosen)
-                    cost = (bio, timbre, 0.0)
-                else:
-                    cost = evaluator.evaluate_first_order(
-                        initial_posture,
-                        chosen,
-                        sub_sequence.events[0],
-                        event,
-                    )
-            else:
-                prev_node = selected[-1]
-                prev_event = sub_sequence.events[idx - 1]
-                if prev_prev is None:
-                    cost = evaluator.evaluate_first_order(
-                        prev_node,
-                        chosen,
-                        prev_event,
-                        event,
-                    )
-                else:
-                    cost = evaluator.evaluate_second_order(
-                        prev_prev,
-                        prev_node,
-                        chosen,
-                        prev_event,
-                        event,
-                    )
-
             for dim in range(3):
-                total[dim] += float(cost[dim])
+                total[dim] += best_cost[dim]
             selected.append(chosen)
-            if idx > 0:
-                prev_prev = selected[-2]
+            if chosen.hand_position > 0:
+                last_fretted = chosen
 
         solution = ParetoSolution(
             solution_id=1,
             total_cost=_CostTuple((total[0], total[1], total[2])),
-            compound_path=tuple(f"G{idx}:{node.node_id}" for idx, node in enumerate(selected)),
+            compound_path=tuple(f"P_{profile}_{idx}:{node.node_id}" for idx, node in enumerate(selected)),
             posture_sequence=tuple(selected),
         )
         return NamoaStarResult((solution,), len(selected), len(selected), 0)

@@ -93,8 +93,32 @@ class PostureGenerator:
             current=[],
             min_fret=10**9,
             max_fret=-1,
+            span_limit=self.biomechanics.max_hand_span,
             results=valid_combinations,
         )
+
+        # Fallback controlado: solo si el evento polifónico es físicamente imposible
+        # dentro de max_hand_span (ej. bajo grave fijo + nota muy aguda), admite
+        # únicamente las combinaciones de mínima apertura posible.
+        if not valid_combinations and event.polyphony > 1:
+            relaxed: List[List[Tuple[int, FretboardPosition]]] = []
+            self._search_positions(
+                idx=0,
+                candidate_lists=candidate_lists,
+                used_strings=set(),
+                current=[],
+                min_fret=10**9,
+                max_fret=-1,
+                span_limit=9,
+                results=relaxed,
+            )
+            if relaxed:
+                def combo_span(c: List[Tuple[int, FretboardPosition]]) -> int:
+                    frets = [p.fret for _, p in c if not p.is_open]
+                    return (max(frets) - min(frets)) if len(frets) > 1 else 0
+
+                min_possible = min(combo_span(c) for c in relaxed)
+                valid_combinations = [c for c in relaxed if combo_span(c) == min_possible]
 
         postures: List[PostureNode] = []
         for combo in valid_combinations:
@@ -128,6 +152,7 @@ class PostureGenerator:
         current: List[Tuple[int, FretboardPosition]],
         min_fret: int,
         max_fret: int,
+        span_limit: int,
         results: List[List[Tuple[int, FretboardPosition]]],
     ) -> None:
         if idx == len(candidate_lists):
@@ -144,15 +169,8 @@ class PostureGenerator:
             if not pos.is_open:
                 next_min = min(min_fret, pos.fret)
                 next_max = max(max_fret, pos.fret)
-                if next_max - next_min > self.biomechanics.max_hand_span:
-                    is_distant_register_dyad = (
-                        idx == 1
-                        and len(current) == 1
-                        and abs(pos.string - current[0][1].string) >= 4
-                        and next_max - next_min <= 12
-                    )
-                    if not is_distant_register_dyad:
-                        continue
+                if next_max - next_min > span_limit:
+                    continue
 
             used_strings.add(pos.string)
             current.append((midi_pitch, pos))
@@ -163,6 +181,7 @@ class PostureGenerator:
                 current,
                 next_min,
                 next_max,
+                span_limit,
                 results,
             )
             current.pop()
@@ -214,13 +233,12 @@ class PostureGenerator:
         fretted = [a for a in assignments if not a.is_open]
         if len(fretted) <= 1:
             return True
-        if len(fretted) == 2:
-            string_gap = abs(fretted[0].string - fretted[1].string)
-            fret_gap = abs(fretted[0].fret - fretted[1].fret)
-            if string_gap >= 4 and fret_gap <= 12:
-                return True
 
         min_fretted = min(a.fret for a in fretted)
+        max_fretted = max(a.fret for a in fretted)
+        is_fallback_dyad = (
+            len(fretted) == 2 and (max_fretted - min_fretted) > self.biomechanics.max_hand_span
+        )
         max_extra_stretch = max(1, self.biomechanics.max_hand_span - 3)
         by_finger: Dict[int, List[FingerAssignment]] = {}
 
@@ -233,7 +251,7 @@ class PostureGenerator:
                     return False
                 if b.fret < a.fret and b.finger >= a.finger:
                     return False
-                if a.finger != b.finger:
+                if not is_fallback_dyad and a.finger != b.finger:
                     if abs(a.fret - b.fret) > abs(a.finger - b.finger) + max_extra_stretch:
                         return False
 
@@ -255,11 +273,14 @@ class PostureGenerator:
 
         return True
 
-    @staticmethod
-    def _compute_hand_position(assignments: Sequence[FingerAssignment]) -> int:
+    def _compute_hand_position(self, assignments: Sequence[FingerAssignment]) -> int:
         fretted = [a for a in assignments if not a.is_open]
         if not fretted:
             return 0
+        min_fret = min(a.fret for a in fretted)
+        max_fret = max(a.fret for a in fretted)
+        if max_fret - min_fret > self.biomechanics.max_hand_span:
+            return max(1, round(sum(a.fret for a in fretted) / len(fretted)))
         min_a = min(fretted, key=lambda a: (a.fret, a.finger))
         return max(1, min_a.fret - (min_a.finger - 1))
 

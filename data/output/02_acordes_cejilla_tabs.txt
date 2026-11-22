@@ -1,0 +1,26 @@
+
+
+Pieza: 02_acordes_cejilla | Eventos: 4 | Tempo: 90.0 BPM
+Frontera de Pareto: 2 soluciones | Etiquetas (expandidas=17, generadas=111, podadas=184)
+--------------------------------------------------------------------------------
+
+=== Opción Pareto #1 [Ergonómica] | 02_acordes_cejilla ===
+Costo [W_bio=4.710, W_timbre=1.702, W_fluidez=0.000]
+
+e|--0-1-0-0-|
+B|--1-1-1-0-|
+G|--2-2-0-1-|
+D|--2-3-2-2-|
+A|--0-3-3-2-|
+E|----1---0-|
+--------------------------------------------------------------------------------
+
+=== Opción Pareto #2 [Tímbrica] | 02_acordes_cejilla ===
+Costo [W_bio=7.010, W_timbre=1.694, W_fluidez=0.000]
+
+e|--0-1-0-0-|
+B|--1-1-1-0-|
+G|--2-2-0-1-|
+D|--2-3-2-2-|
+A|----3-3-2-|
+E|--5-1---0-|

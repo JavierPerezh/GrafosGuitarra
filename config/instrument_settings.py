@@ -59,10 +59,10 @@ class CostVectorWeights:
     beta_string_crossing: float = 0.8
     same_finger_hop_penalty: float = 0.55
     interior_string_skip_penalty: float = 1.80
-    lambda_stretch: float = 1.2
+    lambda_stretch: float = 1.4
     inertia_reversal_penalty: float = 2.0
-    comfort_fret_limit: int = 8
-    fret_position_penalty: float = 0.45
+    comfort_fret_limit: int = 5
+    fret_position_penalty: float = 0.55
     slide_penalty: float = 0.18
 
     # W_timbre: continuidad acústica y homogeneidad tímbrica
@@ -83,7 +83,7 @@ class CostVectorWeights:
 class SolverConfig:
     exact_eps: float = 1e-9
     merge_eps: float = 0.08
-    max_solutions: int = 6
+    max_solutions: int = 5
     max_segment_events: int = 10
     min_segment_events: int = 3
     min_rest_ioi_sec: float = 0.45

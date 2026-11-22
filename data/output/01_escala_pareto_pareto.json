@@ -1,0 +1,398 @@
+{
+  "title": "01_escala_pareto",
+  "tempo_bpm": 120.0,
+  "num_events": 5,
+  "search_stats": {
+    "pareto_solutions": 5,
+    "expanded_labels": 88,
+    "generated_labels": 262,
+    "pruned_labels": 1203
+  },
+  "solutions": [
+    {
+      "solution_id": 1,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 4.7725,
+        "W_timbre": 2.511028,
+        "W_fluidez": 0.0
+      },
+      "ascii_tab": "=== Opción Pareto #1 [Equilibrada] | 01_escala_pareto ===\nCosto [W_bio=4.772, W_timbre=2.511, W_fluidez=0.000]\n\ne|--0---4-5-7-|\nB|----7-------|\nG|------------|\nD|------------|\nA|------------|\nE|------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.25,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 66
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.5,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 68
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.75,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 1.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 2,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 5.395,
+        "W_timbre": 1.343241,
+        "W_fluidez": 0.0
+      },
+      "ascii_tab": "=== Opción Pareto #2 [Equilibrada] | 01_escala_pareto ===\nCosto [W_bio=5.395, W_timbre=1.343, W_fluidez=0.000]\n\ne|------4-5-7-|\nB|--5-7-------|\nG|------------|\nD|------------|\nA|------------|\nE|------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 64
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.25,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 66
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.5,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 4,
+              "finger": 1,
+              "midi_pitch": 68
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.75,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 2,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 1.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 3,
+      "profile": "[Equilibrada]",
+      "cost_vector": {
+        "W_bio": 6.1875,
+        "W_timbre": 0.742727,
+        "W_fluidez": 1.2
+      },
+      "ascii_tab": "=== Opción Pareto #3 [Equilibrada] | 01_escala_pareto ===\nCosto [W_bio=6.188, W_timbre=0.743, W_fluidez=1.200]\n\ne|--0-2-4-5-7-|\nB|------------|\nG|------------|\nD|------------|\nA|------------|\nE|------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 0,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.25,
+          "hand_position": 2,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 2,
+              "finger": 1,
+              "midi_pitch": 66
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.5,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 4,
+              "finger": 2,
+              "midi_pitch": 68
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.75,
+          "hand_position": 3,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 5,
+              "finger": 3,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 1.0,
+          "hand_position": 4,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 7,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 4,
+      "profile": "[Tímbrica]",
+      "cost_vector": {
+        "W_bio": 18.5375,
+        "W_timbre": 0.642727,
+        "W_fluidez": 2.4
+      },
+      "ascii_tab": "=== Opción Pareto #4 [Tímbrica] | 01_escala_pareto ===\nCosto [W_bio=18.538, W_timbre=0.643, W_fluidez=2.400]\n\ne|--------------|\nB|--5-7-9-10-12-|\nG|--------------|\nD|--------------|\nA|--------------|\nE|--------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 5,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 5,
+              "finger": 1,
+              "midi_pitch": 64
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.25,
+          "hand_position": 6,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 7,
+              "finger": 2,
+              "midi_pitch": 66
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.5,
+          "hand_position": 7,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 9,
+              "finger": 3,
+              "midi_pitch": 68
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.75,
+          "hand_position": 8,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 10,
+              "finger": 3,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 1.0,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 5,
+      "profile": "[Fluidez]",
+      "cost_vector": {
+        "W_bio": 19.1975,
+        "W_timbre": 1.195359,
+        "W_fluidez": 0.0
+      },
+      "ascii_tab": "=== Opción Pareto #5 [Fluidez] | 01_escala_pareto ===\nCosto [W_bio=19.198, W_timbre=1.195, W_fluidez=0.000]\n\ne|---------------|\nB|-------9-10-12-|\nG|--9-11---------|\nD|---------------|\nA|---------------|\nE|---------------|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 9,
+              "finger": 1,
+              "midi_pitch": 64
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.25,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 3,
+              "fret": 11,
+              "finger": 3,
+              "midi_pitch": 66
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 0.5,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 9,
+              "finger": 1,
+              "midi_pitch": 68
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 0.75,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 10,
+              "finger": 2,
+              "midi_pitch": 69
+            }
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_sec": 1.0,
+          "hand_position": 9,
+          "assignments": [
+            {
+              "string": 2,
+              "fret": 12,
+              "finger": 4,
+              "midi_pitch": 71
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

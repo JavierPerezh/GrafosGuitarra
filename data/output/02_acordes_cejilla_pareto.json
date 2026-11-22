@@ -1,0 +1,357 @@
+{
+  "title": "02_acordes_cejilla",
+  "tempo_bpm": 90.0,
+  "num_events": 4,
+  "search_stats": {
+    "pareto_solutions": 2,
+    "expanded_labels": 17,
+    "generated_labels": 111,
+    "pruned_labels": 184
+  },
+  "solutions": [
+    {
+      "solution_id": 1,
+      "profile": "[Ergonómica]",
+      "cost_vector": {
+        "W_bio": 4.71,
+        "W_timbre": 1.701818,
+        "W_fluidez": 0.0
+      },
+      "ascii_tab": "=== Opción Pareto #1 [Ergonómica] | 02_acordes_cejilla ===\nCosto [W_bio=4.710, W_timbre=1.702, W_fluidez=0.000]\n\ne|--0-1-0-0-|\nB|--1-1-1-0-|\nG|--2-2-0-1-|\nD|--2-3-2-2-|\nA|--0-3-3-2-|\nE|----1---0-|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            },
+            {
+              "string": 2,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 60
+            },
+            {
+              "string": 3,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 57
+            },
+            {
+              "string": 4,
+              "fret": 2,
+              "finger": 3,
+              "midi_pitch": 52
+            },
+            {
+              "string": 5,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 45
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.666667,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 65
+            },
+            {
+              "string": 2,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 60
+            },
+            {
+              "string": 3,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 57
+            },
+            {
+              "string": 4,
+              "fret": 3,
+              "finger": 4,
+              "midi_pitch": 53
+            },
+            {
+              "string": 5,
+              "fret": 3,
+              "finger": 3,
+              "midi_pitch": 48
+            },
+            {
+              "string": 6,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 41
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 1.333333,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            },
+            {
+              "string": 2,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 60
+            },
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            },
+            {
+              "string": 4,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 52
+            },
+            {
+              "string": 5,
+              "fret": 3,
+              "finger": 3,
+              "midi_pitch": 48
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 2.0,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            },
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            },
+            {
+              "string": 3,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 56
+            },
+            {
+              "string": 4,
+              "fret": 2,
+              "finger": 3,
+              "midi_pitch": 52
+            },
+            {
+              "string": 5,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 47
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "solution_id": 2,
+      "profile": "[Tímbrica]",
+      "cost_vector": {
+        "W_bio": 7.01,
+        "W_timbre": 1.693636,
+        "W_fluidez": 0.0
+      },
+      "ascii_tab": "=== Opción Pareto #2 [Tímbrica] | 02_acordes_cejilla ===\nCosto [W_bio=7.010, W_timbre=1.694, W_fluidez=0.000]\n\ne|--0-1-0-0-|\nB|--1-1-1-0-|\nG|--2-2-0-1-|\nD|--2-3-2-2-|\nA|----3-3-2-|\nE|--5-1---0-|",
+      "steps": [
+        {
+          "event_index": 0,
+          "onset_sec": 0.0,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            },
+            {
+              "string": 2,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 60
+            },
+            {
+              "string": 3,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 57
+            },
+            {
+              "string": 4,
+              "fret": 2,
+              "finger": 3,
+              "midi_pitch": 52
+            },
+            {
+              "string": 6,
+              "fret": 5,
+              "finger": 4,
+              "midi_pitch": 45
+            }
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_sec": 0.666667,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 65
+            },
+            {
+              "string": 2,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 60
+            },
+            {
+              "string": 3,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 57
+            },
+            {
+              "string": 4,
+              "fret": 3,
+              "finger": 4,
+              "midi_pitch": 53
+            },
+            {
+              "string": 5,
+              "fret": 3,
+              "finger": 3,
+              "midi_pitch": 48
+            },
+            {
+              "string": 6,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 41
+            }
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_sec": 1.333333,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            },
+            {
+              "string": 2,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 60
+            },
+            {
+              "string": 3,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 55
+            },
+            {
+              "string": 4,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 52
+            },
+            {
+              "string": 5,
+              "fret": 3,
+              "finger": 3,
+              "midi_pitch": 48
+            }
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_sec": 2.0,
+          "hand_position": 1,
+          "assignments": [
+            {
+              "string": 1,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 64
+            },
+            {
+              "string": 2,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 59
+            },
+            {
+              "string": 3,
+              "fret": 1,
+              "finger": 1,
+              "midi_pitch": 56
+            },
+            {
+              "string": 4,
+              "fret": 2,
+              "finger": 3,
+              "midi_pitch": 52
+            },
+            {
+              "string": 5,
+              "fret": 2,
+              "finger": 2,
+              "midi_pitch": 47
+            },
+            {
+              "string": 6,
+              "fret": 0,
+              "finger": 0,
+              "midi_pitch": 40
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
